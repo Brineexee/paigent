@@ -6,6 +6,11 @@ import sys
 from openai import OpenAI
 from tools import TOOL_FUNCTIONS, TOOL_SPECS
 
+# SIMPLE SETTINGS GENERAL GUIDE (Written internally for those who are going to skip the README.)
+## Modify DEFAULT_MODEL only if you wish to change the agent's automatic model.
+## MAX_TURNS defines how many rounds the script will loop before giving a final answer
+## SYSTEM_PROMPT is the prompt the agent (as system) will receive before reading the user's prompt (which can be written via the CLI).
+
 DEFAULT_MODEL = "openrouter/free"
 MAX_TURNS = 20
 
@@ -17,7 +22,7 @@ Rules:
 1. Cite sources using bracketed numbers like [1] [2] inline in the text. At the end of the file, include a "Sources" section listing each number with its full URL on its own line. Do not use HTML tags of any kind, including <a> links.
 2. If a tool fails, inspect the error and adjust your approach. Do not repeat failed calls identically.
 3. Write to a given filename at most ONCE. Never rewrite or overwrite an existing output file.
-4. After writing your report file, reply with a concise plain text sumary to complete the run. Do not invoke further tools."""
+4. After writing your report file, reply with a concise plain text summary to complete the run. Do not invoke further tools."""
 
 def get_client() -> OpenAI:
     api_key = os.environ.get("OPENROUTER_API_KEY")

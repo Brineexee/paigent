@@ -4,6 +4,10 @@ import os
 from pathlib import Path
 from ddgs import DDGS
 
+# SIMPLE SETTINGS GENERAL GUIDE (Written internally for those who are going to skip the README.)
+## OUTPUT_DIR is where write_file saves everything the agent produces
+## CODE_TIMEOUT_SECONDS caps how long run_python is allowed to run before it gets killed
+
 OUTPUT_DIR = Path("./agent_output")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
