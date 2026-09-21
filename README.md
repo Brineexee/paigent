@@ -26,12 +26,13 @@ It has three tools available:
 These will be called automatically, if you wish to contribute by creating new tool specifications do feel free to do so (listed in tools.py), **but test them before sending the PR.**
 
 ### Flags
-```--model``` Pick a specific OpenRouter model instead of the default ```openrouter/free``` router. This is primarily useful if you want consistent output instead of a randomly picked free model each run (Check Known Issues #1 to learn why).
+```--model``` Pick a specific OpenRouter model instead of the default ```openrouter/free``` router. 
+This is primarily useful if you want consistent output instead of a randomly picked free model each run (Check Known Issues #1 to learn why).
 
 ```--quiet``` Hides all the extra debug logs and just prints the final answer.
 
 The agent keeps looping, searching, running code, adjusting after failed calls, until it either writes its file and gives a plain text summary or hits the turn limit (20, obviously editable).
-In the SYSTEM_PROMPT it's defined so that all cited claims come back in ```[1]``` ```[2]``` style with a Sources list at the end, therefore no raw HTML links in the middle of the answer.
+In the SYSTEM_PROMPT it's defined so that all cited claims come back in ```[1]``` ```[2]``` style with a Sources list at the end, therefore there should not be any raw HTML links in the middle of the answer.
 
 
 ## Examples
