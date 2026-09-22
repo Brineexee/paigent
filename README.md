@@ -54,7 +54,9 @@ python agent.py "Research discussions from developer forums and technical video 
 paigent can autonomously pay for gated resources using the [x402 protocol](https://www.x402.org/), which is an open standard that revives the HTTP 402 status code so clients (including AI agents) can pay for a resource in stablecoins over plain HTTP.
 
 This repo includes a small demo paywall server that gates a single endpoint behind a $0.01 equivalent EURC payment on Base Sepolia testnet. To try it you just need to set ```EVM_PRIVATE_KEY``` (the wallet paying) and ```SELLER_EVM_ADDRESS``` (the wallet receiving) in ```.env```, start the paywall server ( ```python paywall_server.py```) and write your task in another terminal, example:
- ```python agent.py "Fetch the premium fact from http://localhost:4021/premium-fact, paying for it if required"```
+```
+python agent.py "Fetch the premium fact from http://localhost:4021/premium-fact, paying for it if required"
+```
 
 Spending is limited by a $0.05 individual payment cap via x402's own spend controls, and a host allowlist in ```payments.py``` so the agent can only ever pay hosts you've explicitly listed. Make sure to add your custom hosts to the list if you want the agent to be able to pay on different sites.
 
