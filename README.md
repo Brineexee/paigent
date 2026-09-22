@@ -50,7 +50,7 @@ Use a specific model instead of the random free router (For this option, make su
 python agent.py "Research discussions from developer forums and technical video essays regarding core engine performance bottlenecks in Cities: Skylines II. Write a cited 5 paragraph summary to performance_fixes.md on how to resolve rendering and simulation issues at the structural level." --model deepseek/deepseek-v4-flash:free
 ```
 
-## Payments (pay_and_fetch)
+## Payment System
 paigent can autonomously pay for gated resources using the [x402 protocol](https://www.x402.org/), which is an open standard that revives the HTTP 402 status code so clients (including AI agents) can pay for a resource in stablecoins over plain HTTP.
 
 This repo includes a small demo paywall server that gates a single endpoint behind a $0.01 equivalent EURC payment on Base Sepolia testnet. To try it you just need to set ```EVM_PRIVATE_KEY``` (the wallet paying) and ```SELLER_EVM_ADDRESS``` (the wallet receiving) in ```.env```, start the paywall server ( ```python paywall_server.py```) and write your task in another terminal, example:
@@ -64,3 +64,9 @@ These issues should be fixed, but they don't necessarily rely on my end. If you 
 
 ## Contributing
 Found a bug or want to add a feature? Feel free to open an issue or submit a pull request. If you're adding a new tool specification, **_always test it before sending the PR._**
+
+<p align="center">
+  <a href="https://ko-fi.com/brineexee">
+    <img src="https://ko-fi.com" alt="Support me on Ko-fi" height="36">
+  </a>
+</p>
