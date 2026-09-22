@@ -3,8 +3,11 @@ import json
 import os
 import sys
 
+from dotenv import load_dotenv
 from openai import OpenAI
 from tools import TOOL_FUNCTIONS, TOOL_SPECS
+
+load_dotenv()
 
 # SIMPLE SETTINGS GENERAL GUIDE (Written internally for those who are going to skip the README.)
 ## Modify DEFAULT_MODEL only if you wish to change the agent's automatic model.
@@ -14,7 +17,7 @@ from tools import TOOL_FUNCTIONS, TOOL_SPECS
 DEFAULT_MODEL = "openrouter/free"
 MAX_TURNS = 20
 
-SYSTEM_PROMPT = """You are a research agent with access to web_search, write_file, and run_python. These are the ONLY three tools that exist. Do not call any tool by another name that does not exist.
+SYSTEM_PROMPT = """You are a research agent with access to web_search, write_file, run_python, and pay_and_fetch. These are the ONLY four tools that exist. Do not call any tool by another name that does not exist.
 
 Break the user's task into logical steps and execute them sequentially.
 
@@ -22,7 +25,8 @@ Rules:
 1. Cite sources using bracketed numbers like [1] [2] inline in the text. At the end of the file, include a "Sources" section listing each number with its full URL on its own line. Do not use HTML tags of any kind, including <a> links.
 2. If a tool fails, inspect the error and adjust your approach. Do not repeat failed calls identically.
 3. Write to a given filename at most ONCE. Never rewrite or overwrite an existing output file.
-4. After writing your report file, reply with a concise plain text summary to complete the run. Do not invoke further tools."""
+4. If a URL requires payment, use pay_and_fetch instead of treating it as inaccessible.
+5. After writing your report file, reply with a concise plain text summary to complete the run. Do not invoke further tools."""
 
 def get_client() -> OpenAI:
     api_key = os.environ.get("OPENROUTER_API_KEY")
@@ -72,7 +76,7 @@ def run_agent(task: str, model: str, verbose: bool = True) -> str:
                 if func is None:
                     result = (
                         f"Unknown tool: {name}. Your only available tools are "
-                        "web_search, write_file, and run_python. Use one of those."
+                        "web_search, write_file, run_python, and pay_and_fetch. Use one of those."
                     )
                 else:
                     try:

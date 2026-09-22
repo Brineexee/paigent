@@ -3,6 +3,7 @@ import tempfile
 import os
 from pathlib import Path
 from ddgs import DDGS
+from payments import pay_and_fetch
 
 # SIMPLE SETTINGS GENERAL GUIDE (Written internally for those who are going to skip the README.)
 ## OUTPUT_DIR is where write_file saves everything the agent produces
@@ -72,8 +73,7 @@ def run_python(code: str) -> str:
         os.unlink(script_path)
 
 
-# Tool definitions handed to the model, plus the lookup table used to
-# actually run them once the model picks one.
+# Tool definitions handed to the model, plus the lookup table used to actually run them once the model picks one.
 # P.S. If you wish to contribute by creating new tool specifications do feel free to do so, but test them before sending the PR.
 
 TOOL_SPECS = [
@@ -121,10 +121,25 @@ TOOL_SPECS = [
             },
         },
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "pay_and_fetch",
+            "description": "Fetch a URL that requires x402 payment. Detects an HTTP 402 response, signs a testnet EURC payment on Base Sepolia, and retries automatically. Capped at $0.05 per payment and restricted to an explicit host allowlist for safety.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "url": {"type": "string", "description": "the full URL of the paid resource"},
+                },
+                "required": ["url"],
+            },
+        },
+    },
 ]
 
 TOOL_FUNCTIONS = {
     "web_search": web_search,
     "write_file": write_file,
     "run_python": run_python,
+    "pay_and_fetch": pay_and_fetch,
 }
