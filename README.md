@@ -64,9 +64,3 @@ These issues should be fixed, but they don't necessarily rely on my end. If you 
 
 ## Contributing
 Found a bug or want to add a feature? Feel free to open an issue or submit a pull request. If you're adding a new tool specification, **_always test it before sending the PR._**
-
-<p align="center">
-  <a href="https://ko-fi.com/brineexee">
-    <img src="https://ko-fi.com" alt="Support me on Ko-fi" height="36">
-  </a>
-</p>
